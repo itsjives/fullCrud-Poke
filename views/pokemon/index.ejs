@@ -1,0 +1,49 @@
+<!-- DO NOT TOUCH LINE 3 ! This imports our HTML layout-->
+<!-- Everything below line 3 feel free to delete and or build on. This is just sample data -->
+<%- contentFor('body') %>
+
+<div class='top_div'>
+<span class='homeClass'style="color:white; text-decoration:none;">Pokemón home page.</span>
+<button type='button' name="button" id="add_new"><a href='/pokemon/new'> Add New Pokemon</a></button>
+</div>
+<div class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Trainer_id</th>
+      <th>Combat Power</th>
+      <th>In Gym</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% for (var i = 0; i < pokemon.length; i++) { %>
+      <tr>
+        <td>
+          <%= pokemon[i].id %>
+        </td>
+        <td><a href='/pokemon/<%= pokemon[i].id %>/details'><%= pokemon[i].name %></a></td>
+        <td><%= pokemon[i].trainer_id %></td>
+        <td><%= pokemon[i].cp %></td>
+        <td><%= pokemon[i].in_gym %></td>
+        <td>
+          <% if (pokemon[i].id === p1){ %>
+            <a href='/pokemon/<%=pokemon[i].id%>/remove/p1'>Remove from Gym</a>
+          <% } else if(pokemon[i].id === p2) { %>
+            <a href='/pokemon/<%=pokemon[i].id%>/remove/p2'>Remove from Gym</a>
+          <% } else if(!(p1 && p2)) { %>
+            <a href='/pokemon/<%=pokemon[i].id%>/assign'>Assign to Gym</a>
+          <% } %>
+        </td>
+        <td>
+          <form class='buttonEdits' method='GET' action='pokemon/<%= pokemon[i].id %>/edit'>
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type='submit' name='editPokemon' value='Edit'>
+          </form>
+          <form class='buttonEdits' method='POST' action='pokemon/<%= pokemon[i].id %>/delete'>
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type='submit' name='delete_pokemon' value='Delete'>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>

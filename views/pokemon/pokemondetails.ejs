@@ -1,0 +1,12 @@
+<%- contentFor('body') %>
+<% for (var i = 0; i < pokemon.length; i++){ %>
+<div class='detailsDiv'>
+  <h3> <%= pokemon[i].name %></h3>
+    <label class='labelEdit'>Pokemon Combat Power:</label>
+    <p><%= pokemon[i].cp %></p>
+    <label class='labelEdit'>Pokemon In Gym</label>
+    <p><%= pokemon[i].in_gym %></p>
+    <label class='labelEdit'>Pokemon Trainer</label>
+    <p><%= pokemon[i].t_name %></p>
+<% } %>
+</div>

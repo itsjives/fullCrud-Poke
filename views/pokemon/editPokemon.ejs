@@ -1,0 +1,22 @@
+<%- contentFor('body') %>
+<div class='createPokeForm'>
+<h1>Edit <%= pokemon.name %></h1>
+  <form method='POST' action='/pokemon/<%= pokemon.id %>/details' >
+    <label for='name'>Name : </label>
+    <input type='text' name='name' value='<%= pokemon.name %>'/>
+    <label for='trainer'>Trainer : </label>
+    <select name='trainer'>
+      <% for(var i=0; i<trainers.length; i++){ %>
+        <option value='<%= trainers[i].name %>'
+          <% if(trainers[i].id === pokemon.trainer_id) { %>
+            selected
+          <% } %> >
+          <%= trainers[i].name %>
+        </option>
+      <% } %>
+    </select>
+    <label for='cp'>Combat Power : </label>
+    <input type='number' name='cp' value='<%= pokemon.cp %>'/>
+    <input type='submit' value='Edit Pokemon' />
+  </form>
+</div>

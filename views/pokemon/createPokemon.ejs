@@ -1,0 +1,16 @@
+<%- contentFor('body') %>
+<div class='createPokeForm'>
+  <form method='POST' action='/pokemon'>
+    <label>Pokemon Name:</label>
+    <input type='text' name='pokemon_name'>
+    <label>Pokemon Combat Power:</label>
+    <input type='number' name='cp'>
+    <label>Pokemon In Gym:</lable>
+    <select name='in_gym'>
+      <option>false</option>
+    </select>
+    <label>Pokemon Trainer ID </label>
+    <input type='number' name='trainer_id'>
+    <input type='submit' name='submit' value='Create Pokemon'>
+  </form>
+</div>

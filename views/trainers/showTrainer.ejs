@@ -1,0 +1,7 @@
+<%- contentFor('body') %>
+<div class='detailsDiv'>
+  <h3><%= trainer_name.t_name %>'s Pokemon</h3>
+  <% for (var i = 0; i < trainer.length; i++){ %>
+      <p><%=trainer[i].name %></p>
+<% } %>
+</div>

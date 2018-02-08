@@ -1,0 +1,93 @@
+<%- contentFor('body') %>
+<div class='div_container'>
+<h1>Gym</h1>
+
+<% if(p1 === p2) { %>
+  <h2>A Pokemon cannot fight itself! Please choose a different Pokemon!</h2>
+<% } %>
+
+<div id='pre-battle'>
+  <div id='pre-battle-top'>
+    <div id='poke-1'>
+      <h2>Pokemon 1</h2>
+      <% if(pokemon1) { %>
+        <h3><%= pokemon1.name %></h3>
+      <% } else { %>
+        <form action='/pokemon/assign/p1' method='POST'>
+          <p class='gym-p'>
+            Choose Pokemon 1 :
+          </p>
+          <select name='playerid'>
+            <% for(var i=0; i < pokemon.length; i++){ %>
+              <option value='<%= pokemon[i].id %>'><%= pokemon[i].name %></option>
+            <% } %>
+          </select>
+          <input class="mdl-button mdl-js-button mdl-button--raised " type='submit' value='assign' />
+        </form>
+      <% } %>
+    </div>
+    <div id='vs'>
+      <p class='gym-p'>
+        VS
+      </p>
+    </div>
+    <div id='poke-2'>
+      <h2>Pokemon 2</h2>
+      <% if(pokemon2 && (p1 !== p2)) { %>
+        <h3><%= pokemon2.name %></h3>
+      <% } else { %>
+        <form action='/pokemon/assign/p2' method='POST'>
+          <p class='gym-p'>
+            Choose Pokemon 2 :
+          </p>
+          <select name='playerid'>
+            <% for(var i=0; i<pokemon.length; i++){ %>
+              <option value='<%= pokemon[i].id %>'><%= pokemon[i].name %></option>
+            <% } %>
+          </select>
+          <input class="mdl-button mdl-js-button mdl-button--raised " type='submit' value='assign' />
+        </form>
+      <% } %>
+    </div>
+  </div>
+  <div id='pre-battle-bottom'>
+    <div id='gym-buttons-container'>
+      <button class="mdl-button mdl-js-button mdl-button--raised " type='button' class='gym-button' id='reset'>Reset</button>
+      <% if((p1 && p2) && (p1 !== p2)){ %>
+        <button class="mdl-button mdl-js-button mdl-button--raised " type="button" name="battle" class='gym-button' id='battle'>Battle!</button>
+        <% } %>
+    </div>
+  </div>
+</div>
+
+<div id='post-battle'>
+  <% if(pokemon1 && pokemon2){ %>
+    <% if(pokemon1.cp > pokemon2.cp){ %>
+      <h2 class='gym-winner'>the winner is </h2>
+      <h2 class='gym-winner'><%= pokemon1.name %>!</h2>
+    <% } else if (pokemon2.cp > pokemon1.cp) {%>
+      <h2 class='gym-winner'>the winner is </h2>
+      <h2 class='gym-winner'><%= pokemon2.name %>!</h2>
+    <% } %>
+  <% } %>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+<script type='text/javascript'>
+  var battle = $('#battle');
+  var preBattle = $('#pre-battle');
+  var postBattle = $('#post-battle');
+  var reset = $('#reset');
+  $(postBattle).hide();
+  $(reset).on('click',function(){
+    window.location.href = '/gym/clear';
+  });
+  $(battle).on('click',function(){
+    $(preBattle).hide();
+    $(postBattle).show();
+    $(reset).on('click',function(){
+      window.location.href = '/gym/clear';
+    });
+  })
+</script>
